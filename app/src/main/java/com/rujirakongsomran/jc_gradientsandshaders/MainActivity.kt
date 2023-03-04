@@ -19,6 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rujirakongsomran.jc_gradientsandshaders.ui.theme.JC_GradientsAndShadersTheme
@@ -100,13 +102,73 @@ fun ChangeDistributionColorsWithColorStops() {
             .requiredSize(200.dp)
             .background(Brush.horizontalGradient(colorStops = colorStop))
     )
+}
 
+@Composable
+fun RepeatWithTileMode() {
+    val listColor = listOf(Color.Yellow, Color.Red, Color.Blue)
+    val tileSize = with(LocalDensity.current) {
+        50.dp.toPx()
+    }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 10.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .requiredSize(200.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        listColor,
+                        endX = tileSize,
+                        tileMode = TileMode.Repeated
+                    )
+                )
+        )
+        Box(
+            modifier = Modifier
+                .requiredSize(200.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        listColor,
+                        endX = tileSize,
+                        tileMode = TileMode.Mirror
+                    )
+                )
+        )
+        Box(
+            modifier = Modifier
+                .requiredSize(200.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        listColor,
+                        endX = tileSize,
+                        tileMode = TileMode.Clamp
+                    )
+                )
+        )
+        Box(
+            modifier = Modifier
+                .requiredSize(100.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        listColor,
+                        endX = tileSize,
+                        tileMode = TileMode.Decal
+                    )
+                )
+        )
+    }
 }
 
 @Preview(showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     JC_GradientsAndShadersTheme {
-        ChangeDistributionColorsWithColorStops()
+        RepeatWithTileMode()
     }
 }
