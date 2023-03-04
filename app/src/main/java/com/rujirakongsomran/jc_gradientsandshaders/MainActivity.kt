@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -83,6 +86,20 @@ fun GradientBrushes() {
             }
         )
     }
+}
+
+@Composable
+fun ChangeDistributionColorsWithColorStops() {
+    val colorStop = arrayOf(
+        0.0f to Color.Yellow,
+        0.2f to Color.Red,
+        1f to Color.Blue
+    )
+    Box(
+        modifier = Modifier
+            .requiredSize(200.dp)
+            .background(Brush.horizontalGradient(colorStops = colorStop))
+    )
 
 }
 
@@ -90,6 +107,6 @@ fun GradientBrushes() {
 @Composable
 fun GreetingPreview() {
     JC_GradientsAndShadersTheme {
-        GradientBrushes()
+        ChangeDistributionColorsWithColorStops()
     }
 }
